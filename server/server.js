@@ -22,12 +22,11 @@ socket.broadcast.emit('newMessage', generateMessage('Admin', 'New User Joined'))
         console.log('createMessage', message);
         io.emit('newMessage', generateMessage(message.from, message.text));
         callback('This is from the server');
-        // socket.broadcast.emit('newMessage', {
-        //     from: message.from,
-        //     text: message.text,
-        //     createdAt: new Date().getTime()
-        // });
+
     });
+socket.on('createLocationMessage', (coords) => {
+    io.emit('newMessage', generateMessage('Admin', `${coords.latitude}, ${coords.longitude}`))
+});
 
     socket.on('disconnect', () => {
        console.log('user was disconnected');
